@@ -1,6 +1,23 @@
 # download-canvas-files
 Example using the Canvas API to download files, including directory structure and Canvas Modules.
 
+* Clone this repo and install requirements.
+* Identify a Canvas course from which you want to download files and make sure you have permissions.
+* Create an API token through the settings menu for your user.
+* Fill out `.env` variables (see below).
+* Run `python downloader.py`
+
+```
+LOCAL_DIR = '~/Desktop/example_course/'
+CANVAS_API_URL="https://institution.test.instructure.com/"
+CANVAS_API_KEY="<you-api-key-retrieved-from-the-canvas-interface>"
+CANVAS_EXAMPLE_COURSE_NUMBER=11111
+```
+
+The results will download all files found in the "files" section of a Canvas course to a specified local directory. If you have Google Drive installed on your local machine, files downloaded to a "watched" Google Drive folder will automatically sync those files to the cloud.
+
+Note, this package also allows files to be downloaded by Module, but is currently turned off.
+
 ## Motivation
 MIT OpenCourseWare freely publishes teaching materials to https://ocw.mit.edu. OCW has recently launched a new platform that streamlines publishing through a number of technology integrations, for example, utlizing Google Drive as the backend for content authors. OCW authors collect materials from faculty and instruction platforms across MIT and routinely need to share, collaborate, and modify materials before publishing to the web.
 
