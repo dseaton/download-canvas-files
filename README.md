@@ -14,6 +14,11 @@ CANVAS_API_KEY="<you-api-key-retrieved-from-the-canvas-interface>"
 CANVAS_EXAMPLE_COURSE_NUMBER=11111
 ```
 
+### Running the downloader
+Set your .env variables.
+
+`python downloader.py`
+
 The results will download all files found in the "files" section of a Canvas course to a specified local directory. If you have Google Drive installed on your local machine, files downloaded to a "watched" Google Drive folder will automatically sync those files to the cloud.
 
 Note, this package also allows files to be downloaded by Module, but is currently turned off.
@@ -39,17 +44,9 @@ Third-party python package used in this repo: https://canvasapi.readthedocs.io/e
   - One can also use this repo/script to simply download locally.
 - You have python3 and can install requirements.
 
-### Running the downloader
-Set your .env variables.
-
-`LOCAL_DOWNLOAD_DIR = ~/Desktop/example_course/`, directory where files will be download, e.g., local Google Drive folder (which syncs automatically).
-
-`CANVAS_API_URL="https://institution.test.instructure.com/"`,  org/institutional url of the Canvas instance.
-
-`CANVAS_API_KEY"<you-api-key-retrieved-from-the-canvas-interface>"`,  API key generated through the Canvas settings interface.
-
-`CANVAS_EXAMPLE_COURSE_NUMBER=11111`,  the course number found in a Canvas URL (e.g., https://canvas.instructure.com/courses/2066466). 
-
-To run the downloader:
-
-`python downloader.py`
+### Known Issues / Things to Work on
+#### Downloading "files" and "files in their respective Modules"
+All files are uploaded to the "files" section of a Canvas course. Files can also be linked to "Modules", which provides an easier to navigate experience for students. The API can provide file endpoints when parsing modules (i.e., linked pages, pdfs, etc within each module). Both the "files" section and the "Modules" representation can benefit an OCW author. 
+- Issue: the current code duplicates files when downloading both the "files" and "module" representation. A possible solution would be to create symlinks in the module representation.
+- Issue: the API currently cannot specify whether a module is "published" or "unpublished" (keep working with A. Roy).
+- Issue: the current code orders Module folders (in the target location) by name, not the order in which they appear in Canvas. There is a field called "position" that provides the order of each module (e.g., position=2). One could incorporate a unique identifier [01], [02], [03] to order these modules for course authors.
